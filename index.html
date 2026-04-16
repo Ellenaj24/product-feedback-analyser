@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Product Feedback Analyser — A PM Case Study</title>
+<meta name="description" content="A repeatable workflow for turning raw customer feedback into prioritised product opportunities, using Qualtrics, Excel and Microsoft Copilot.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="logo">Signal</a>
+    <nav>
+      <a href="#problem">Problem</a>
+      <a href="#workflow">Workflow</a>
+      <a href="#framework">Framework</a>
+      <a href="#outcome">Outcome</a>
+      <a href="full-design.html">Full design doc →</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<section class="hero">
+  <div class="container">
+    <span class="eyebrow">Product Manager · Case Study</span>
+    <h1>Turning customer noise into prioritised product opportunities.</h1>
+    <p class="lede">A repeatable workflow I designed to consolidate customer feedback from multiple channels, surface what matters most, and feed evidence-backed recommendations into the roadmap. Built with Qualtrics, Excel and Microsoft Copilot.</p>
+    <div class="meta-grid">
+      <div><span class="meta-label">Role</span><span class="meta-value">Product Manager</span></div>
+      <div><span class="meta-label">Stack</span><span class="meta-value">Qualtrics · Excel · Copilot</span></div>
+      <div><span class="meta-label">Output</span><span class="meta-value">Workflow + scoring framework</span></div>
+      <div><span class="meta-label">Type</span><span class="meta-value">Internal product / process</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="problem" class="section">
+  <div class="container narrow">
+    <span class="section-tag">01 · The problem</span>
+    <h2>Feedback was everywhere. Insight was nowhere.</h2>
+    <p>Customer feedback was arriving through surveys, support tickets, sales conversations and reviews — each living in a different tool, owned by a different team. Volume made it impossible to read everything. Recency bias took over. The roadmap was being shaped by whoever spoke loudest in the last meeting, not by what customers were actually telling us.</p>
+    <div class="callout">
+      <strong>The real problem wasn't a lack of feedback.</strong> It was the absence of a repeatable way to synthesise it, prioritise it, and turn it into decisions.
+    </div>
+  </div>
+</section>
+
+<section id="workflow" class="section section-alt">
+  <div class="container">
+    <span class="section-tag">02 · The workflow</span>
+    <h2>From raw comment to roadmap input, in ten steps.</h2>
+    <p class="section-intro">I designed an end-to-end pipeline that any PM on the team could pick up and run. Each step has a clear owner, a clear output, and a clear handoff to the next.</p>
+
+    <div class="workflow-grid">
+      <div class="workflow-step"><span class="step-num">01</span><h3>Collect</h3><p>Feedback gathered via Qualtrics surveys, plus exports from support, app stores and interview notes.</p></div>
+      <div class="workflow-step"><span class="step-num">02</span><h3>Consolidate</h3><p>All feedback imported into a single Excel workbook — one row per piece of feedback.</p></div>
+      <div class="workflow-step"><span class="step-num">03</span><h3>Clean</h3><p>Duplicates removed, dates standardised, off-topic responses filtered out.</p></div>
+      <div class="workflow-step"><span class="step-num">04</span><h3>Categorise</h3><p>Each row tagged with product area, customer segment and feedback type. Copilot drafts; PM reviews.</p></div>
+      <div class="workflow-step"><span class="step-num">05</span><h3>Detect themes</h3><p>Copilot clusters semantically similar comments. PM confirms, splits or merges the candidate themes.</p></div>
+      <div class="workflow-step"><span class="step-num">06</span><h3>Identify pain points</h3><p>Themes converted into named pain points with severity and frequency counts.</p></div>
+      <div class="workflow-step"><span class="step-num">07</span><h3>Generate opportunities</h3><p>Each pain point translated into a customer-outcome-led opportunity statement.</p></div>
+      <div class="workflow-step"><span class="step-num">08</span><h3>Prioritise</h3><p>Opportunities scored against a six-criterion framework, weighted for strategic alignment.</p></div>
+      <div class="workflow-step"><span class="step-num">09</span><h3>Report</h3><p>Stakeholder summary and PM working summary generated for the monthly cadence review.</p></div>
+      <div class="workflow-step"><span class="step-num">10</span><h3>Feed roadmap</h3><p>Top opportunities enter backlog grooming and quarterly planning, with full evidence trail.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="framework" class="section">
+  <div class="container narrow">
+    <span class="section-tag">03 · The prioritisation framework</span>
+    <h2>A scoring model that starts conversations, not ends them.</h2>
+    <p>Every opportunity is scored 1–5 against six criteria. Strategic alignment is weighted higher because it's the one that most often gets quietly ignored. Effort is weighted lower because it's the easiest to mis-estimate early.</p>
+
+    <table class="framework-table">
+      <thead><tr><th>Criterion</th><th>What it measures</th><th>Weight</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Frequency</strong></td><td>How often this came up across feedback</td><td>1.0</td></tr>
+        <tr><td><strong>Severity</strong></td><td>How painful for the customer when it occurs</td><td>1.0</td></tr>
+        <tr><td><strong>Customer impact</strong></td><td>Breadth across segments and product areas</td><td>1.0</td></tr>
+        <tr><td><strong>Strategic alignment</strong></td><td>Fit with current product and company strategy</td><td>1.5</td></tr>
+        <tr><td><strong>Confidence in evidence</strong></td><td>Quality and consistency of supporting feedback</td><td>1.0</td></tr>
+        <tr><td><strong>Implementation effort</strong></td><td>Inverse — lower effort scores higher</td><td>0.5</td></tr>
+      </tbody>
+    </table>
+
+    <div class="formula-box">
+      <span class="formula-label">Score formula</span>
+      <code>(Freq × 1.0) + (Sev × 1.0) + (Impact × 1.0) + (Strategic × 1.5) + (Confidence × 1.0) + (Effort × 0.5)</code>
+      <span class="formula-meta">Maximum possible: 30. Treat the score as a starting point, not a verdict.</span>
+    </div>
+  </div>
+</section>
+
+<section id="outcome" class="section section-alt">
+  <div class="container narrow">
+    <span class="section-tag">04 · The outcome</span>
+    <h2>What changed.</h2>
+    <p>The team moved from anecdotal prioritisation to a defensible, evidence-backed process. Every opportunity in the backlog could now be traced back to the original customer voices that produced it. Stakeholder conversations shifted from "what do you think we should build?" to "here is what 47 customers told us, grouped into 6 themes, ranked by impact."</p>
+
+    <div class="outcome-grid">
+      <div class="outcome-card"><h3>Single source of truth</h3><p>All feedback consolidated into one workbook with a consistent taxonomy.</p></div>
+      <div class="outcome-card"><h3>Repeatable rhythm</h3><p>Weekly hygiene, monthly synthesis, quarterly roadmap input — runnable by any PM.</p></div>
+      <div class="outcome-card"><h3>Evidence trail</h3><p>Every opportunity links back to the verbatim comments that justify it.</p></div>
+      <div class="outcome-card"><h3>Faster decisions</h3><p>Less time arguing about what customers want. More time deciding what to do about it.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container narrow">
+    <span class="section-tag">05 · Reflection</span>
+    <h2>What I'd do differently.</h2>
+    <p>Copilot is a fast first-draft analyst, not a final one. Early on I trusted its clustering more than I should have, and a few themes ended up too broad to be actionable. The fix was to add a PM review gate after every Copilot step and to keep the tag glossary tight. If I were starting again, I'd build that review gate in from day one rather than retrofitting it.</p>
+    <p>I'd also instrument the workflow itself sooner — tracking how long each step takes, which themes recur month after month, and which opportunities get acted on versus shelved. That longitudinal view is where the real organisational learning lives.</p>
+  </div>
+</section>
+
+<section class="section section-cta">
+  <div class="container narrow">
+    <h2>Want the full design document?</h2>
+    <p>The complete 13-section workflow specification — including the Excel workbook structure, 12 ready-to-use Copilot prompts, a worked example with sample data, the operating model, and risks and limitations.</p>
+    <a href="full-design.html" class="btn">Read the full design document →</a>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>Designed and written by [Your Name] · <a href="https://github.com/[your-username]">GitHub</a> · <a href="mailto:[your-email]">Get in touch</a></p>
+  </div>
+</footer>
+
+</body>
+</html>
