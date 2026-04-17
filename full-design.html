@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Full Design Document — Product Feedback Analyser</title>
-<meta name="description" content="The complete design document for the Product Feedback Analyser workflow.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&display=swap" rel="stylesheet">
@@ -22,28 +21,200 @@
 </header>
 
 <main>
-  <article class="markdown-body" id="content">
-    <p style="color:#888;">Loading…</p>
+  <article class="markdown-body">
+
+<h1>Product Feedback Analyser</h1>
+<p>A workflow I designed to turn raw customer feedback into prioritised product opportunities using Qualtrics, Excel and Microsoft Copilot.</p>
+
+<hr>
+
+<h2>Why I built this</h2>
+<p>I wrote this full design document to show the thinking behind the workflow, not just the summary. It covers how the system works end to end, the Excel structure, how Copilot fits in, the scoring model, and how a team would actually run this on a regular basis.</p>
+<p>If you have already read the case study page this goes deeper into the detail.</p>
+
+<hr>
+
+<h2>1. What this is</h2>
+<p>The Product Feedback Analyser is a lightweight repeatable workflow that consolidates customer feedback from multiple channels into a single Excel workbook, uses Microsoft Copilot to surface themes and pain points, and outputs a prioritised list of product opportunities ready to feed into the roadmap.</p>
+<p><strong>Who it is for:</strong> Product Managers who need evidence based prioritisation rather than gut feel.</p>
+<p><strong>Core value:</strong> It creates a single source of truth for customer feedback and a consistent way to go from raw comments to roadmap decisions.</p>
+
+<hr>
+
+<h2>2. The problem it solves</h2>
+<p>Customer feedback arrives from Qualtrics surveys, HubSpot via marketing, and quality and regulations through complaints from customer service. It sits in different tools owned by different teams. Without a way to consolidate and synthesise it, the team cannot see what matters most.</p>
+<p>Actions end up being measured by the number of complaints rather than broader feedback and insights from post market surveillance surveys. The team reacts to problems as they come in rather than proactively understanding what customers need.</p>
+<p>This workflow fixes that by creating a repeatable cycle of collect, synthesise, prioritise, decide.</p>
+
+<hr>
+
+<h2>3. End to end workflow</h2>
+<table>
+<thead><tr><th>Step</th><th>What happens</th><th>Owner</th></tr></thead>
+<tbody>
+<tr><td>1. Collect</td><td>Gather feedback via Qualtrics, HubSpot, quality and regulations complaints</td><td>PM + CX</td></tr>
+<tr><td>2. Consolidate</td><td>Import into one Excel workbook, one row per comment</td><td>PM</td></tr>
+<tr><td>3. Clean</td><td>Remove duplicates, standardise dates, filter off topic responses</td><td>PM</td></tr>
+<tr><td>4. Categorise</td><td>Tag product area, segment, feedback type. Copilot drafts, PM reviews</td><td>PM + Copilot</td></tr>
+<tr><td>5. Detect themes</td><td>Copilot clusters similar comments. PM confirms, splits or merges</td><td>PM + Copilot</td></tr>
+<tr><td>6. Identify pain points</td><td>Themes become named pain points with severity and frequency</td><td>PM</td></tr>
+<tr><td>7. Generate opportunities</td><td>Pain points become customer outcome led opportunity statements</td><td>PM</td></tr>
+<tr><td>8. Prioritise</td><td>Score against six criteria</td><td>PM + team</td></tr>
+<tr><td>9. Report</td><td>Stakeholder and PM summaries for the monthly review</td><td>PM</td></tr>
+<tr><td>10. Feed roadmap</td><td>Top opportunities go into backlog grooming and quarterly planning</td><td>PM + eng lead</td></tr>
+</tbody>
+</table>
+
+<hr>
+
+<h2>4. What gets captured</h2>
+<p><strong>At intake:</strong> Feedback ID, date, source, channel, customer segment, product area, feedback text.</p>
+<p><strong>During analysis:</strong> Feedback type (bug, usability, feature request, praise), sentiment, theme, pain point category, severity (1 to 5), frequency count, opportunity area, confidence in evidence, notes.</p>
+
+<hr>
+
+<h2>5. Excel workbook structure</h2>
+<table>
+<thead><tr><th>Sheet</th><th>Purpose</th></tr></thead>
+<tbody>
+<tr><td>00 README</td><td>How to use the workbook, cadence, owner</td></tr>
+<tr><td>01 Raw Feedback</td><td>Every piece of feedback, one row each</td></tr>
+<tr><td>02 Tagged Feedback</td><td>Same rows enriched with analysis fields</td></tr>
+<tr><td>03 Themes</td><td>One row per theme with description and count</td></tr>
+<tr><td>04 Pain Points</td><td>One row per pain point with severity and frequency</td></tr>
+<tr><td>05 Opportunities</td><td>The opportunity backlog with scores</td></tr>
+<tr><td>06 Prioritised View</td><td>Top opportunities sorted for stakeholders</td></tr>
+<tr><td>07 Reports</td><td>Monthly snapshot archive</td></tr>
+<tr><td>08 Glossary</td><td>Standard tag definitions to keep tagging consistent</td></tr>
+</tbody>
+</table>
+<p>The sheets connect in sequence. Raw Feedback flows into Tagged Feedback. Tagged rows aggregate into Themes. Themes roll up into Pain Points. Pain Points generate Opportunities. Opportunities get filtered into the Prioritised View for stakeholder review.</p>
+<p><strong>What is manual vs Copilot assisted:</strong> The PM owns tag definitions, final theme names, severity scores, strategic alignment scoring, final opportunity statements, and all decisions on what enters the roadmap. Copilot handles first pass categorisation, clustering similar comments, sentiment tagging, and drafting summaries.</p>
+
+<hr>
+
+<h2>6. How the analysis works</h2>
+<p>Similar feedback gets clustered by meaning and intent. A cluster becomes a candidate theme when it has at least 3 distinct comments. The PM reviews and confirms.</p>
+<p>For each theme I ask "why is the customer saying this?" twice. The first answer is usually the symptom. The second is closer to the root cause. Both get recorded but prioritisation focuses on the root.</p>
+<p>Feedback types are tagged as:</p>
+<ul>
+<li><strong>Bug</strong> means something is broken</li>
+<li><strong>Usability</strong> means it works but is hard to use</li>
+<li><strong>Feature request</strong> means something is missing</li>
+<li><strong>Praise</strong> means positive signal worth noting</li>
+</ul>
+<p>Each pain point produces an opportunity statement in the form: "For [segment], improve [product area] so that [outcome the customer can achieve]." This keeps opportunities customer outcome led rather than feature led.</p>
+
+<hr>
+
+<h2>7. Prioritisation framework</h2>
+<table>
+<thead><tr><th>Criterion</th><th>What it measures</th><th>Weight</th></tr></thead>
+<tbody>
+<tr><td>Frequency</td><td>How often it came up</td><td>1.0</td></tr>
+<tr><td>Severity</td><td>How painful for the customer</td><td>1.0</td></tr>
+<tr><td>Customer impact</td><td>Breadth across segments</td><td>1.0</td></tr>
+<tr><td>Strategic alignment</td><td>Fit with product direction</td><td>1.5</td></tr>
+<tr><td>Confidence</td><td>Quality of supporting evidence</td><td>1.0</td></tr>
+<tr><td>Effort</td><td>Inverse, lower effort scores higher</td><td>0.5</td></tr>
+</tbody>
+</table>
+<p><strong>Score = (Freq × 1.0) + (Sev × 1.0) + (Impact × 1.0) + (Strategic × 1.5) + (Confidence × 1.0) + (Effort × 0.5)</strong></p>
+<p>Maximum: 30. Score in a team session to reduce bias. Treat it as a conversation starter, not a final answer.</p>
+
+<hr>
+
+<h2>8. What it produces</h2>
+<p>Each cycle the workflow outputs:</p>
+<ul>
+<li>Ranked list of recurring themes with frequency counts</li>
+<li>Top pain points with severity and reach</li>
+<li>Full opportunity backlog with current scores</li>
+<li>Top 5 to 10 recommendations for action</li>
+<li>Short narrative on what changed since last cycle</li>
+<li>One page stakeholder summary</li>
+<li>Longer PM working summary</li>
+<li>Proposed roadmap additions with evidence links</li>
+</ul>
+
+<hr>
+
+<h2>9. How Copilot is used</h2>
+<p>Copilot sits inside Excel and Word to speed up the parts that would otherwise take hours manually. It clusters comments, drafts tags, summarises patterns and produces first draft reports. The PM reviews and edits everything.</p>
+<h3>6 key Copilot prompts I use</h3>
+<ol>
+<li>"Read the Feedback Text column. Group comments into 5 to 10 themes. For each give a name, description, count, and 3 example quotes."</li>
+<li>"Cluster the rows by semantic similarity. Output a table with Cluster ID, suggested name, count and row IDs."</li>
+<li>"From the Themes sheet identify the underlying pain points. For each provide a name, category and the themes it covers."</li>
+<li>"Analyse sentiment across the Tagged Feedback sheet. Show distribution by Product Area and flag any area where Negative exceeds 50%."</li>
+<li>"Write a one page summary for leadership covering the 3 biggest pain points, top 5 opportunities, what changed since last cycle, and next steps."</li>
+<li>"Translate the top 5 opportunities into roadmap entries with title, problem statement, outcome, evidence summary, success metric and effort indicator."</li>
+</ol>
+
+<hr>
+
+<h2>10. Example output</h2>
+<h3>Sample feedback</h3>
+<table>
+<thead><tr><th>ID</th><th>Source</th><th>Segment</th><th>Area</th><th>Comment</th><th>Type</th></tr></thead>
+<tbody>
+<tr><td>FB-201</td><td>Qualtrics</td><td>Enterprise</td><td>Reporting</td><td>Reports take over a minute to load on Mondays</td><td>Bug</td></tr>
+<tr><td>FB-202</td><td>HubSpot</td><td>SMB</td><td>Onboarding</td><td>Had no idea I needed to verify email before inviting users</td><td>Usability</td></tr>
+<tr><td>FB-203</td><td>Complaints</td><td>Free</td><td>Mobile</td><td>Crashes when I open dashboard tab</td><td>Bug</td></tr>
+<tr><td>FB-204</td><td>Qualtrics</td><td>Enterprise</td><td>Reporting</td><td>We need scheduled reports, exporting manually each week is painful</td><td>Feature request</td></tr>
+<tr><td>FB-205</td><td>Complaints</td><td>Enterprise</td><td>Billing</td><td>Switching plans is confusing, had to ask support</td><td>Usability</td></tr>
+</tbody>
+</table>
+
+<h3>Top themes</h3>
+<p>Slow report generation, confusing onboarding flow, mobile dashboard crashes, demand for scheduled exports, plan switching friction.</p>
+
+<h3>Top opportunities (scored)</h3>
+<table>
+<thead><tr><th>Opportunity</th><th>Score</th></tr></thead>
+<tbody>
+<tr><td>Improve report engine performance</td><td>26.5</td></tr>
+<tr><td>Redesign onboarding verification and invites</td><td>24.0</td></tr>
+<tr><td>Fix mobile dashboard crash</td><td>23.0</td></tr>
+<tr><td>Scheduled report exports</td><td>20.5</td></tr>
+<tr><td>Simplify plan switching</td><td>16.5</td></tr>
+</tbody>
+</table>
+
+<hr>
+
+<h2>11. How a team runs this</h2>
+<table>
+<thead><tr><th>Activity</th><th>Frequency</th></tr></thead>
+<tbody>
+<tr><td>Import and tag new feedback</td><td>Weekly, about 30 mins</td></tr>
+<tr><td>Run theme and pain point analysis</td><td>Monthly</td></tr>
+<tr><td>Score and review opportunities</td><td>Monthly</td></tr>
+<tr><td>Stakeholder review</td><td>Monthly</td></tr>
+<tr><td>Feed into roadmap planning</td><td>Quarterly</td></tr>
+</tbody>
+</table>
+<p>The PM owns the whole process. CX helps with feedback collection. Designer or researcher gives input on theme and pain point review. The team scores opportunities together. Engineering lead is involved when top opportunities enter planning.</p>
+
+<hr>
+
+<h2>12. Risks and limitations</h2>
+<p>Copilot can get clustering wrong so everything needs a PM review step. Survey respondents are not representative of all customers so silent users are invisible. Frequency is one input not the whole answer because a pain point affecting 5 strategic enterprise customers might matter more than one affecting 50 trial users. The scoring formula is a starting point for discussion, not a replacement for judgement.</p>
+
+<hr>
+
+<h2>13. Summary</h2>
+<p>This is a lightweight workflow that takes customer feedback from wherever it lives, brings it into one structured Excel workbook, uses Copilot to speed up pattern detection, and produces a prioritised list of opportunities backed by real customer evidence.</p>
+<p>The value is not the tooling. The value is the operating rhythm. A repeatable cycle of collect, synthesise, prioritise, decide that makes customer feedback a genuine input to the roadmap rather than background noise.</p>
+
   </article>
 </main>
 
 <footer class="site-footer">
   <div class="container">
-    <p>Designed and written by [Your Name] · <a href="https://github.com/[your-username]">GitHub</a> · <a href="mailto:[your-email]">Get in touch</a></p>
+    <p>Designed and written by Ellena Jones</p>
   </div>
 </footer>
-
-<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-<script>
-fetch('product-feedback-analyser.md')
-  .then(r => r.text())
-  .then(md => {
-    document.getElementById('content').innerHTML = marked.parse(md);
-  })
-  .catch(err => {
-    document.getElementById('content').innerHTML = '<p>Could not load the document. <a href="product-feedback-analyser.md">View raw markdown</a>.</p>';
-  });
-</script>
 
 </body>
 </html>
